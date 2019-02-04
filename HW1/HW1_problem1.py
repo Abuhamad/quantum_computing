@@ -1,48 +1,43 @@
 '''
 
-Author: Alex Baker
-Date : 3 April 2008
-Description : Investigate the properties of the Pauli Spin matricies.
+Author: Mohammed Abuhamad
+UCFID: 5013840
+Description : 
+			Assignment 1: Problem 1
+			Compute the eigenbases of the Pauli operators 
+			and check that they form mutually unbiased bases.
 
 '''
 
-from numpy import *
+import numpy as np
 import numpy.linalg as la
+np.set_printoptions(precision=2)
 
-# pauli spin
+# pauli operators
+sigma_x = np.array([[0, 1],[1, 0]])
+sigma_y = np.array([[0, -1j],[1j, 0]])
+sigma_z = np.array([[1, 0],[0, -1]])
 
-sx = array([[0, 1],[ 1, 0]])
-sy = array([[0, -1j],[1j, 0]])
-sz = array([[1, 0],[0, -1]])
+#for these pauli matrices eigenvectors are eginbases
+def get_bases(matrix):
+    eigenvalues, eigenvectors = la.eig(matrix)
+    return eigenvectors
 
-# sigma functions
+def is_MUB (eigenbasis1, eigenbasis2):
+    return np.around(np.square(la.norm(np.matmul(eigenbasis1, eigenbasis2))), decimals=1) == 1.0/len(eigenbasis1)
 
-sigma_x = array([[0, 1],[1, 0]])
-sigma_y = array([[0, -1j],[1j, 0]])
-sigma_z = array([[1, 0],[0, -1]])
+def check_bases_two_matrices (matrix1, matrix2):
+    bases1 = get_bases(matrix1)
+    bases2 = get_bases(matrix2)
+    for basis1 in bases1:
+        for basis2 in bases2:
+            print( "Are eigenbases {} and {} mutually unbiased :> {}\n".format(basis1, basis2, is_MUB(basis1, basis2)))
 
-# standard basis
+if __name__ == '__main__':
 
-spin_up = array([[1],[0]])
-spin_down = array([[0],[1]])
-
-# spin ladder operators
-
-sigma_one_plus = sigma_x + 1j * sigma_y
-sigma_two_plus = sigma_x + 1j * sigma_y
-
-print 'example 1\n========='
-print 's_{z} |+1/2, +1/2> = frac{hbar}{2} ( sigma_{1z} tensor 1_{2} + 1_{1} tensor sigma_{2z} ) |+1/2, +1/2>'
-print mat(kron(sigma_z, identity(2))) * mat(kron(spin_up, spin_up))
-
-print 'example 2\n========='
-print 's_{+} |-1/2, -1/2>'
-print (mat(kron(sigma_one_plus, identity(2))) * mat(kron(spin_down, spin_down)) + mat(kron(identity(2), sigma_one_plus)) * mat(kron(spin_down, spin_down))) / 2
-
-print 'example 3\n========='
-print 's_{+} |+1/2, -1/2>'
-print (mat(kron(sigma_one_plus, identity(2))) * mat(kron(spin_up, spin_down)) + mat(kron(identity(2), sigma_one_plus)) * mat(kron(spin_up, spin_down))) / 2
-
-print 'example 4\n========='
-print 's_{+} |-1/2, +1/2>'
-print (mat(kron(sigma_one_plus, identity(2))) * mat(kron(spin_down, spin_up)) + mat(kron(identity(2), sigma_one_plus)) * mat(kron(spin_down, spin_up))) / 2
+	print ("Eigenbases of sigma_x are :{} and {} \n".format(get_bases(sigma_x)[:,0], get_bases(sigma_x)[:,1]))
+	print ("Eigenbases of sigma_y are :{} and {} \n".format(get_bases(sigma_y)[:,0], get_bases(sigma_y)[:,1]))
+	print ("Eigenbases of sigma_z are :{} and {} \n".format(get_bases(sigma_z)[:,0], get_bases(sigma_z)[:,1]))
+	check_bases_two_matrices(sigma_x, sigma_y)
+	check_bases_two_matrices(sigma_x, sigma_z)
+	check_bases_two_matrices(sigma_y, sigma_z)
