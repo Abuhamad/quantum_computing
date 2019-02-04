@@ -1,13 +1,18 @@
 '''
 
-Author: Alex Baker
-Date : 3 April 2008
-Description : Investigate the properties of the Pauli Spin matricies.
+Author: Mohammed Abuhamad
+UCFID: 5013840
+Description : 
+			Assignment 1: Problem 3
+			Compute the eigenbases of the Pauli operators 
+			and check that they form mutually unbiased bases.
 
 '''
 
-from numpy import *
+import numpy as np
 import numpy.linalg as la
+np.set_printoptions(precision=2)
+
 
 # pauli spin
 
