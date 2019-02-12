@@ -1,5 +1,6 @@
 \documentclass[12pt]{article}
 \usepackage{amsmath, amssymb, amsthm,qcircuit}
+\usepackage{comment}
 
 \renewcommand{\>}{\rangle}
 \newcommand{\<}{\langle}
@@ -69,14 +70,33 @@ i & 0
 \end{array}
 \right)
 \]
-are mutually unbiased. Implement Python methods that compute the eigenbases of the Pauli operators and check that they form mutually unbiased bases.
+are mutually unbiased. Implement Python methods that compute the eigenbases of the Pauli operators and check that they form mutually unbiased bases. \newline
 
 
 
 
+\textbf{Answer: } Each Pauli matrix has the eigenvalues 1 and −1, and their respective eigenvectors are as follows:
+\begin{itemize}
+    \item $\sigma_x = \left(\begin{array}{cc} 0 & 1 \\ 1 & 0 \end{array} \right)$ has the basis $|{\uparrow} \sigma_x \> = \frac{1}{\sqrt{2}} \left(\begin{array}{cc} 1 \\ 1 \end{array} \right)$ and $|{\downarrow} \sigma_x \> = \frac{1}{\sqrt{2}}\left(\begin{array}{cc} 1 \\ -1 \end{array} \right)$ 
+    \item $\sigma_y = 
+\left(
+\begin{array}{cc}
+0 & -i \\
+i & 0
+\end{array}
+\right)$ has the basis $|{\uparrow} \sigma_y \> = \frac{1}{\sqrt{2}} \left(\begin{array}{cc} 1 \\ i \end{array} \right)$ and $|{\downarrow} \sigma_y \> = \frac{1}{\sqrt{2}}\left(\begin{array}{cc} 1 \\ -i \end{array} \right)$
+    \item $\sigma_z = 
+\left(
+\begin{array}{cc}
+1 & 0 \\
+0 & -1
+\end{array}
+\right)$ has the basis $|{\uparrow} \sigma_z \> =  \left(\begin{array}{cc} 1 \\ 0 \end{array} \right)$ and $|{\downarrow} \sigma_z \> = \left(\begin{array}{cc} 0 \\ 1 \end{array} \right)$
+\end{itemize}
 
+To show that those eigenvectors are mutually unbiased, check the $|\< \psi_i | \psi'_j \>|^2 = \frac{1}{d}$, for example:
 
-
+$$|\< \uparrow \sigma_z | \uparrow \sigma_x \>|^2 = | \left(\begin{array}{cc} 1 \quad 0 \end{array} \right)  \left(\begin{array}{cc} \frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} \end{array} \right)|^2 = (\frac{1}{\sqrt{2}})^2 = \frac{1}{2}$$
 
 
 
@@ -99,8 +119,59 @@ For $A,B\in\C^{d\times d}$, define
 \]
 Prove that the above map defines an inner product on the vector space $\C^{d\times d}$. (In the literature, this inner product is called the trace inner product or Hilbert-Schmidt inner product.) \newline
 
-\textbf{Answer: }
+\textbf{Answer: } Let's denote $\< . , . \>$ as the inner product instead of $\< . | . \>$ to avoid confusion between the inner product of matrices $\in \C^{d\times d}$ and vectors $\< bra | ket \>$.
+To prove $\< A , B\>_{\mathrm{Tr}} = \mathrm{Tr}(A^\dagger B)$ is an inner product on $\C^{d\times d}$, the following properties should be fulfilled:
+\begin{enumerate}
+    \item \textbf{Conjugate-linearity in the first factor:}
+    Consider $A, B, C \in\C^{d\times d}$, then:
+    \begin{align*}
+        \< A + B , C\> & = \mathrm{Tr}((A^\dagger + B^\dagger)  C) \\
+                       & = \mathrm{Tr}(A^\dagger C + B^\dagger C) \\
+                       & = \mathrm{Tr}(A^\dagger C) +  \mathrm{Tr}(B^\dagger C) \\
+                       & = \<A, C\>_{\mathrm{Tr}} +  \<B, C\>_{\mathrm{Tr}}
+    \end{align*}
+    Moreover,
+    \begin{align*}
+        \< aA + bB , C\> & = \mathrm{Tr}((aA^\dagger + bB^\dagger)  C) \\
+                       & = \mathrm{Tr}(aA^\dagger C + bB^\dagger C) \\
+                       & = a \mathrm{Tr}(A^\dagger C) +  b \mathrm{Tr}(B^\dagger C) \\
+                       & = a \<A, C\>_{\mathrm{Tr}} +  b \<B, C\>_{\mathrm{Tr}}
+    \end{align*}
+    \item \textbf{Linearity in the second factor:}
+        \begin{align*}
+        \< A , B + C\> & = \mathrm{Tr}(A^\dagger (B + C) \\
+                       & = \mathrm{Tr}(A^\dagger B + A^\dagger C) \\
+                       & =  \mathrm{Tr}(A^\dagger B) +   \mathrm{Tr}(A^\dagger C) \\
+                       & =  \<A, B\>_{\mathrm{Tr}} +   \<A, C\>_{\mathrm{Tr}}
+    \end{align*}
+    Moreover,
+    \begin{align*}
+        \< A , bB\> & = \mathrm{Tr}(A^\dagger bB) \\
+                       & = b~ \mathrm{Tr}(A^\dagger B) \\
+                       & = b~ \<A, B\>_{\mathrm{Tr}}
+    \end{align*}
+    \item \textbf{Symmetry:} It is clear that $\< . , .\>$ is symmetric as $\mathrm{Tr}$ is transpose invariant.
+    $$\< A, B \>_{\mathrm{Tr}} = \mathrm{Tr}(A^\dagger B) = \mathrm{Tr}((B A^\dagger)^\dagger) =  \< B, A \>_{\mathrm{Tr}}$$
+    \item \textbf{Positivity:} For $A \in \C^{d\times d}$, the $\< A, A \>_{\mathrm{Tr}} = \mathrm{Tr}(A^\dagger A) = \sum_{i,j = 1}^{n} |a_{i,j}|^2$ which is always positive.
+    
+    
+\end{enumerate}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{comment}
 First, the dot product $\< A | B\>$ is a scalar value (a matrix  $\in\C^{1\times 1}$), and it is calculated as 
 \begin{equation}
 \< A | B\> =  \sum_{i=1}^d a_i b_i 
@@ -130,7 +201,9 @@ And the dot product of $A^\dagger \in \C^{d\times 1}$ and $B \in \C^{1\times d}$
 \end{bmatrix}. 
 \]
 
-Notice the  $\mathrm{Tr}(A^\dagger B) = \sum_{i=1}^d a_i b_i = \< A | B\>_\mathrm{Tr}$ 
+Notice the  $\mathrm{Tr}(A^\dagger B) = \sum_{i=1}^d a_i b_i = \< A | B\>_\mathrm{Tr}$
+\end{comment}
+ 
 
 
 
