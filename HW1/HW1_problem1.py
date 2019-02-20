@@ -23,9 +23,11 @@ def get_bases(matrix):
     eigenvalues, eigenvectors = la.eig(matrix)
     return eigenvectors
 
+#check whether two eigenbases are mutually unbiased (MUB)
 def is_MUB (eigenbasis1, eigenbasis2):
     return np.around(np.square(la.norm(np.matmul(eigenbasis1, eigenbasis2))), decimals=1) == 1.0/len(eigenbasis1)
 
+#get the eigenbases of matrices and check those bases
 def check_bases_two_matrices (matrix1, matrix2):
     bases1 = get_bases(matrix1)
     bases2 = get_bases(matrix2)
