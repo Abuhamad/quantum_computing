@@ -1,7 +1,7 @@
 \documentclass[12pt]{article}
 \usepackage{amsmath, amssymb, amsthm,qcircuit}
 \usepackage{comment}
-
+\usepackage{hyperref}
 \renewcommand{\>}{\rangle}
 \newcommand{\<}{\langle}
 \newcommand{\cL}{\mathcal{L}}
@@ -99,10 +99,11 @@ To show that those eigenvectors are mutually unbiased, check the $|\< \psi_i | \
 $$|\< \uparrow \sigma_z | \uparrow \sigma_x \>|^2 = | \left(\begin{array}{cc} 1 \quad 0 \end{array} \right)  \left(\begin{array}{cc} \frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} \end{array} \right)|^2 = (\frac{1}{\sqrt{2}})^2 = \frac{1}{2}$$
 
 
+\noindent
+\textbf{Code:} Please, find the code in the following link.
 
-
-
-
+\noindent
+{\small \em \url{ https://github.com/Abuhamad/quantum_computing/blob/master/HW1/HW1_problem1.py}}
 
 
 \newpage
@@ -233,6 +234,15 @@ where the addition is modulo $k+1$ and $\omega=e^{2\pi i/d}$ is a primitive $d$t
 \[
 M^{(a,b)} = X^a Z^b
 \]
-where $a,b\in\{0,\ldots, d-1\}$ form an orthonormal basis with respect to the trace inner product. Implement methods in Python that construct these matrices and compute the trace inner product for all pairs. (The above collection of matrices is called a unitary error basis in the literature and is used, for instance, in the theory of quantum error correcting codes and quantum channels for qudit systems. It is a generalization of the Pauli basis for a qubit system to a qudit system.)
+where $a,b\in\{0,\ldots, d-1\}$ form an orthonormal basis with respect to the trace inner product. Implement methods in Python that construct these matrices and compute the trace inner product for all pairs. (The above collection of matrices is called a unitary error basis in the literature and is used, for instance, in the theory of quantum error correcting codes and quantum channels for qudit systems. It is a generalization of the Pauli basis for a qubit system to a qudit system.) \newline
+
+
+
+\noindent
+\textbf{Code:} Please, find the code in the following link.
+
+\noindent
+{\small \em \url{https://github.com/Abuhamad/quantum_computing/blob/master/HW1/HW1_problem3.py}}
+
 
 \end{document}
