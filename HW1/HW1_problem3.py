@@ -75,7 +75,7 @@ def check_basis(M):
 	
 	#if checks = len(eigenvectors) * (len(eigenvectors) - 1) / 2 then all pairs are checked
 	if check == (len(eigenvectors) * (len(eigenvectors) - 1) / 2):
-		print('All {} vector cobinations are orthogonal'.format(check))
+		print('There are {} basis and all {} vector combinations are orthogonal'.format(len(eigenvectors), check))
 	else:
 		print ('Not all basis are orthogonal')
 
