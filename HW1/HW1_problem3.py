@@ -52,7 +52,7 @@ def check_basis(M):
 		print('basis {}: {} \n'.format(idx, eigenvector))
 	'''
 
-	#check every pair (orthonormal if <v_i,v_j> = 0 when i!=j) and <v_i,v_i> = 1
+	#check every pair (orthogonal if <v_i,v_j> = 0 when i!=j) and <v_i,v_i> = 1
 	check = 0
 	for idx in range(len(eigenvectors)-1):
 		for jdx in range(idx, len(eigenvectors)):
@@ -63,7 +63,7 @@ def check_basis(M):
 				if np.around(np.inner(eigenvectors[idx].T, eigenvectors[jdx]), decimals = 1) == 1:
 					check +=1
 				else:
-					print ('basis {} and {} are not orthonormal'.format(eigenvectors[idx], eigenvectors[jdx]))
+					print ('basis {} and {} are not orthogonal'.format(eigenvectors[idx], eigenvectors[jdx]))
 				
 			else:
 				
@@ -71,13 +71,13 @@ def check_basis(M):
 					check +=1
 
 				else:
-					print ('basis {} and {} are not orthonormal'.format(eigenvectors[idx], eigenvectors[jdx]))
+					print ('basis {} and {} are not orthogonal'.format(eigenvectors[idx], eigenvectors[jdx]))
 	
 	#if checks = len(eigenvectors) * (len(eigenvectors) - 1) / 2 then all pairs are checked
 	if check == (len(eigenvectors) * (len(eigenvectors) - 1) / 2):
-		print('All {} vector cobinations are orthonormal'.format(check))
+		print('All {} vector cobinations are orthogonal'.format(check))
 	else:
-		print ('Not all basis are orthonormal')
+		print ('Not all basis are orthogonal')
 
 
 
