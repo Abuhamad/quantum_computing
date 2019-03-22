@@ -2,7 +2,6 @@
 '''
 
 Author: Mohammed Abuhamad
-UCFID: 5013840
 Description : 
 			Assignment 1: Problem 3 (Unitary error basis).
 
